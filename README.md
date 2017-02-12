@@ -3,6 +3,6 @@
 ## Setup
 
 ```bash
-npm -install
+meteor npm install
 meteor
 ```
