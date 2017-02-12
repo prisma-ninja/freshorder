@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import { Grid, Button, Form, Image } from 'semantic-ui-react'
 
+import Login from './users/Login.jsx'
+
 export default class App extends Component {
 
 	render() {
@@ -9,15 +11,7 @@ export default class App extends Component {
 				<Grid.Row>
       				<Grid.Column width={8} textAlign='left'>
       					<Image src='hamburger.svg' size='small' centered/>
-      					<Form>
-						    <Form.Field>
-						   		<Form.Input label='id' placeholder='id' />
-						    </Form.Field>
-						    <Form.Field>
-								<Form.Input label='password' placeholder='password' type='password' />
-						    </Form.Field>
-							<Button type='submit' floated='right'>Eat!</Button>
-						</Form> 
+      					<Login /> 
 					</Grid.Column>
 				</Grid.Row>
 			</Grid>
