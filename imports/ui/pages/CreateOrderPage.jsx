@@ -18,4 +18,3 @@ export default class CreateOrderPage extends Component {
 		)
 	}
 }
-

@@ -5,7 +5,10 @@ export default class CreateOrder extends Component {
 
 	constructor(props) {
     	super(props);
-    	const left = props.let - new Date().getTime(); 
+    	let left = props.let - new Date().getTime(); 
+    	if (left < 0) {
+    		left = 0;
+    	}
     	this.state = {secondsLeft: Math.floor(left/1000)};
   	}
 

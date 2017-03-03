@@ -3,17 +3,34 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 // Pages
 import LoginPage from '../../ui/pages/LoginPage.jsx'
-import NoOrdersPage from '../../ui/pages/NoOrdersPage.jsx'
 import OrdersPage from '../../ui/pages/OrdersPage.jsx'
 import CreateOrderPage from '../../ui/pages/CreateOrderPage.jsx'
 import AddToOrderPage from '../../ui/pages/AddToOrderPage.jsx'
+import LostPage from '../../ui/pages/LostPage.jsx'
+
+function isAuthenticate() {
+	return Meteor.userId() != null;
+}
+
+function requireAuth(nextState, replace) {
+	if (!isAuthenticate()) {
+		replace('/login');
+	}
+}
+
+function requireNotAuth(nextState, replace) {
+	if (isAuthenticate()) {
+		replace('/');
+	}
+}
 
 export const renderRoutes = () => (
   <Router history={browserHistory}>
-    <Route path="/" component={LoginPage} />
-    <Route path="/orders" component={NoOrdersPage} />
-    <Route path="/orderst" component={OrdersPage} />
-    <Route path="/orders/add" component={CreateOrderPage} />
-    <Route path="/orders/1/add" component={AddToOrderPage} />
+    <Route path="/orders/:id/add" component={AddToOrderPage} onEnter={requireAuth} />
+    <Route path="/orders/add" component={CreateOrderPage} onEnter={requireAuth} />
+    <Route path="/orders" component={OrdersPage} onEnter={requireAuth} />
+    <Route path="/login" component={LoginPage} onEnter={requireNotAuth} />
+    <Route path="/" component={OrdersPage} onEnter={requireAuth} />
+    <Route path="*" component={LostPage} />
    </Router>
 );
